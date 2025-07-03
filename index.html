@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 LED Control</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <h2>ESP32 LED Control</h2>
+  <button onclick="setLED('led1', 'on')">LED 1 ON</button>
+  <button onclick="setLED('led1', 'off')">LED 1 OFF</button><br><br>
+  <button onclick="setLED('led2', 'on')">LED 2 ON</button>
+  <button onclick="setLED('led2', 'off')">LED 2 OFF</button>
+
+  <script>
+    const firebaseConfig = {
+      databaseURL: "https://led-control-7969f-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function setLED(led, state) {
+      db.ref("/" + led).set(state);
+    }
+  </script>
+</body>
+</html>
